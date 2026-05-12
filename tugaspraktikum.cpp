@@ -1,0 +1,76 @@
+#include <iostream>
+#include <string>
+#include <vector>
+using namespace std;
+
+class user {
+public:
+    static int globalId;
+    int id;
+    string nama;
+    string email;
+    user(string n, string e) : nama(n), email(e) {
+        id = generateId();
+    }
+    int generateId() {
+        globalId++;
+        return globalId;
+    }
+};
+int user::globalId = 0;
+
+class member : public user {
+public:
+    bool status;
+    member(string n, string e) : user(n, e), status(true) {
+        cout << "Member \"" << nama << "\" dibuat (ID: " << id << ")\n";
+    }
+    void showProfile() {
+        cout << "ID     : " << id << "\n";
+        cout << "Nama   : " << nama << "\n";
+        cout << "Email  : " << email << "\n";
+        cout << "Status : " << (status ? "Aktif" : "Non-Aktif") << "\n";
+        cout << "-----------------------\n";
+    }
+};
+
+class admin : public user {
+public:
+    admin(string n, string e) : user(n, e) {
+        cout << "Admin \"" << nama << "\" dibuat (ID: " << id << ")\n";
+    }
+    void showAllMember(vector<member*> list) {
+        cout << "\n=== DAFTAR SEMUA MEMBER ===\n";
+        for (int i = 0; i < list.size(); i++)
+            list[i]->showProfile();
+    }
+    void toggleActivationMember(member* m) {
+        m->status = !m->status;
+        cout << "\n[!] Status member \"" << m->nama << "\" diubah menjadi: "
+             << (m->status ? "Aktif" : "Non-Aktif") << "\n";
+    }
+};
+
+int main() {
+    admin* adm = new admin("Andi", "admin.andi@domain.com");
+    cout << endl;
+
+    member* m1 = new member("Tono", "tono@domain.com");
+    member* m2 = new member("Rini", "rini@domain.com");
+    member* m3 = new member("Dewi", "dewi@domain.com");
+
+    vector<member*> list;
+    list.push_back(m1);
+    list.push_back(m2);
+    list.push_back(m3);
+
+    adm->showAllMember(list);
+    adm->toggleActivationMember(m2);
+    adm->showAllMember(list);
+
+    delete adm;
+    delete m1;
+    delete m2;
+    delete m3;
+    return 0;
+}//
