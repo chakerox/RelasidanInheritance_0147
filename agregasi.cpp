@@ -3,7 +3,7 @@ using namespace std;
 
 #include "anak.h"
 #include "ibu.h"
-
+int main(){
     ibu* varIbu = new ibu("Siti");
     ibu* varIbu2 = new ibu("Sarah");
     anak* varAnak1 = new anak("Budi");
@@ -23,3 +23,7 @@ using namespace std;
     delete varAnak1;
     delete varAnak2;
     delete varAnak3;
+
+    system("pause");
+    return 0;
+}
