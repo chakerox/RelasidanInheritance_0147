@@ -14,3 +14,6 @@ using namespace std;
     varIbu->tambahkanAnak(varAnak2);
     varIbu2->tambahkanAnak(varAnak3);
     varIbu2->tambahkanAnak(varAnak1);
+
+    varIbu->cetakAnak();
+    varIbu2->cetakAnak();
