@@ -11,15 +11,20 @@ class ibu {
         vector<anak*> daftar_anak;
 
         ibu(string pNama) : nama(pNama){
-            cout << "Ibu \"" << nama << "\" ada\n;
-            }
+            cout << "Ibu \"" << nama << "\" ada\n";
+        }
         ~ibu(){
-            cout << "Ibu \"" << nama << "\" tidak ada\n;
+            cout << "Ibu \"" << nama << "\" tidak ada\n";
         }
         void tambahkanAnak(anak*);
         void cetakAnak();
+    
 };
 
 void ibu :: tambahkanAnak(anak* pAnak){
             daftar_anak.push_back(pAnak);
 }
+void ibu::cetakAnak(){
+    cout << "Daftar Anak dari Ibu \"" << this ->nama << "\":\n";
+}
+#endif
