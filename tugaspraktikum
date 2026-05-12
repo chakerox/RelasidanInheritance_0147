@@ -51,3 +51,26 @@ public:
     }
 };
 
+int main() {
+    admin* adm = new admin("Andi", "admin.andi@domain.com");
+    cout << endl;
+
+    member* m1 = new member("Tono", "tono@domain.com");
+    member* m2 = new member("Rini", "rini@domain.com");
+    member* m3 = new member("Dewi", "dewi@domain.com");
+
+    vector<member*> list;
+    list.push_back(m1);
+    list.push_back(m2);
+    list.push_back(m3);
+
+    adm->showAllMember(list);
+    adm->toggleActivationMember(m2);
+    adm->showAllMember(list);
+
+    delete adm;
+    delete m1;
+    delete m2;
+    delete m3;
+    return 0;
+}
