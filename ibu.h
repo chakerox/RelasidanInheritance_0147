@@ -18,4 +18,8 @@ class ibu {
         }
         void tambahkanAnak(anak*);
         void cetakAnak();
-}   
+};
+
+void ibu :: tambahkanAnak(anak* pAnak){
+            daftar_anak.push_back(pAnak);
+}
