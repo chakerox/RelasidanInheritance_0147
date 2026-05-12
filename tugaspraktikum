@@ -1,0 +1,53 @@
+#include <iostream>
+#include <string>
+#include <vector>
+using namespace std;
+
+class user {
+public:
+    static int globalId;
+    int id;
+    string nama;
+    string email;
+    user(string n, string e) : nama(n), email(e) {
+        id = generateId();
+    }
+    int generateId() {
+        globalId++;
+        return globalId;
+    }
+};
+int user::globalId = 0;
+
+class member : public user {
+public:
+    bool status;
+    member(string n, string e) : user(n, e), status(true) {
+        cout << "Member \"" << nama << "\" dibuat (ID: " << id << ")\n";
+    }
+    void showProfile() {
+        cout << "ID     : " << id << "\n";
+        cout << "Nama   : " << nama << "\n";
+        cout << "Email  : " << email << "\n";
+        cout << "Status : " << (status ? "Aktif" : "Non-Aktif") << "\n";
+        cout << "-----------------------\n";
+    }
+};
+
+class admin : public user {
+public:
+    admin(string n, string e) : user(n, e) {
+        cout << "Admin \"" << nama << "\" dibuat (ID: " << id << ")\n";
+    }
+    void showAllMember(vector<member*> list) {
+        cout << "\n=== DAFTAR SEMUA MEMBER ===\n";
+        for (int i = 0; i < list.size(); i++)
+            list[i]->showProfile();
+    }
+    void toggleActivationMember(member* m) {
+        m->status = !m->status;
+        cout << "\n[!] Status member \"" << m->nama << "\" diubah menjadi: "
+             << (m->status ? "Aktif" : "Non-Aktif") << "\n";
+    }
+};
+
